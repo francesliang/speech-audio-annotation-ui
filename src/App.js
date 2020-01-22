@@ -1,9 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import './App.css';
 
-
 import Table from 'react-bootstrap/Table';
+import Player from "./Audio";
+
 
 function App() {
   return (
@@ -21,6 +23,10 @@ function App() {
                 </tr>
               </thead>
               <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><Player /></td>
+                </tr>
               </tbody>
           </Table>
       </div>
