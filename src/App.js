@@ -5,13 +5,15 @@ import './App.css';
 
 import Table from 'react-bootstrap/Table';
 import Player from "./Audio";
+import Annotation from "./Annotation";
+import FileUploader from "./FileUpload";
 
 
 function App() {
   return (
     <div className="App">
-        <img src={logo} className="App-logo" alt="logo" />
-      <div class="container">
+      <FileUploader />
+      <div className="container">
           <Table striped bordered hover>
               <thead>
                 <tr>
@@ -23,10 +25,7 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td><Player /></td>
-                </tr>
+                <Annotation />
               </tbody>
           </Table>
       </div>
