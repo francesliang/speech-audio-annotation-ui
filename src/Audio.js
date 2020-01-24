@@ -4,16 +4,22 @@ import 'react-h5-audio-player/lib/styles.css';
 
 
 class Player extends React.Component {
-  render() {
-      return (
-          <AudioPlayer
-            autoPlay
-            src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-            onPlay={e => console.log("onPlay")}
-            // other props here
-          />
-      )
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: null,
+        };
     }
+    render() {
+        return (
+            <AudioPlayer
+              autoPlay
+              src={this.state.data}
+              onPlay={e => console.log("onPlay")}
+              // other props here
+            />
+        )
+      }
 }
 
 
