@@ -10,6 +10,9 @@ const FileUploader = () => {
 
   const handleChangeStatus = ({ meta }, status) => {
     console.log(status, meta)
+    if (status == "done") {
+        console.log(meta.name)
+    }
   }
 
   const handleSubmit = (files, allFiles) => {
@@ -21,7 +24,7 @@ const FileUploader = () => {
     <Dropzone
       getUploadParams={getUploadParams}
       onChangeStatus={handleChangeStatus}
-      onSubmit={handleSubmit}
+      //onSubmit={handleSubmit}
       styles={{ dropzone: { minHeight: 200, maxHeight: 250 } }}
     />
   )

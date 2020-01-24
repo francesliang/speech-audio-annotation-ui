@@ -12,8 +12,8 @@ import FileUploader from "./FileUpload";
 function App() {
   return (
     <div className="App">
-      <FileUploader />
       <div className="container">
+          <FileUploader />
           <Table striped bordered hover>
               <thead>
                 <tr>
