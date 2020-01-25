@@ -9,7 +9,7 @@ class AnnotationTable extends React.Component {
         super(props);
         this.state = {
             error: null,
-            file: undefined,
+            file: this.props.file,
             clips: []
         };
     }
@@ -26,6 +26,7 @@ class AnnotationTable extends React.Component {
               });
           },
           (error) => {
+              console.log('get audio clips error', error)
               this.setState({
                   error: error
               });
@@ -38,7 +39,10 @@ class AnnotationTable extends React.Component {
     }
 
     render() {
-        const { error, file, clips } = this.state;
+        let rows;
+        rows = this.state.clips.map((item, index) => (
+            <AnnotationRow id={index} clipName={item} />
+        ));
         return (
           <Table striped bordered hover>
               <thead>
@@ -51,7 +55,7 @@ class AnnotationTable extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                <AnnotationRow />
+                {rows}
               </tbody>
           </Table>
         )

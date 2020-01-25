@@ -12,7 +12,6 @@ function App() {
     <div className="App">
       <div className="container">
           <FileUploader />
-          <AnnotationTable />
       </div>
     </div>
   );

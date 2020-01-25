@@ -8,8 +8,8 @@ class AnnotationRow extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: null,
-            clipName: null,
+            id: this.props.id,
+            clipName: this.props.clipName,
             audioData: null,
             sampleRate: null,
             annotation: "",
@@ -53,7 +53,10 @@ class AnnotationRow extends React.Component {
         return (
             <tr>
               <td>{this.state.id}</td>
-              <td><Player data={this.state.audioData}/></td>
+              <td>
+                {this.state.clipName}
+                <Player data={this.state.audioData}/>
+              </td>
               <td><input type="text" name="annotation" /></td>
               <td>{this.state.modelPrediction}</td>
               <td>{this.state.confidence}</td>

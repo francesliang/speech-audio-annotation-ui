@@ -1,6 +1,8 @@
 import React from 'react';
-import 'react-dropzone-uploader/dist/styles.css'
-import Dropzone from 'react-dropzone-uploader'
+import 'react-dropzone-uploader/dist/styles.css';
+import Dropzone from 'react-dropzone-uploader';
+
+import AnnotationTable from "./Annotation";
 
 
 class FileUploader extends React.Component {
@@ -25,15 +27,30 @@ class FileUploader extends React.Component {
     }
 
     render() {
-      return (
-        <Dropzone
-          getUploadParams={this.getUploadParams}
-          onChangeStatus={this.handleChangesStatus}
-          //onSubmit={handleSubmit}
-          styles={{ dropzone: { minHeight: 200, maxHeight: 250 } }}
-        />
-      )
-
+        let page;
+        if (this.state.audio_file !== undefined) {
+            page =
+              <div>
+                  <Dropzone
+                    getUploadParams={this.getUploadParams}
+                    onChangeStatus={this.handleChangesStatus}
+                    //onSubmit={handleSubmit}
+                    styles={{ dropzone: { minHeight: 200, maxHeight: 250 } }}
+                  />
+                  <AnnotationTable file={this.state.audio_file}/>
+              </div>;
+        } else {
+            page =
+              <Dropzone
+                getUploadParams={this.getUploadParams}
+                onChangeStatus={this.handleChangesStatus}
+                //onSubmit={handleSubmit}
+                styles={{ dropzone: { minHeight: 200, maxHeight: 250 } }}
+              />;
+        }
+        return (
+            <div>{page}</div>
+        )
     }
 }
 
