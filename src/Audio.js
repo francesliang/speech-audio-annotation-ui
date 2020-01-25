@@ -11,10 +11,12 @@ class Player extends React.Component {
         };
     }
     render() {
+        let audioSrc;
+        audioSrc = "data:audio/wav;base64," + this.state.data;
         return (
             <AudioPlayer
               autoPlay
-              src={this.state.data}
+              src={audioSrc}
               onPlay={e => console.log("onPlay")}
               // other props here
             />
