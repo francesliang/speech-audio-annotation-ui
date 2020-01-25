@@ -20,33 +20,31 @@ class AnnotationRow extends React.Component {
 
     retrieveAudioData() {
         console.log("Get audio data")
-        fetch("http://localhost:5000/get_audio/" + this.state.clipName)
-          .then(
-            (result) => {
-                this.setState({
-                    audioData: result
-                });
-            }
-          )
-    }
-
-    retrieveInference() {
-        console.log("Run inference")
-        axios.post("http://localhost:5000/infer/", {
-            audio_data: this.state.audioData,
-            sample_rate: this.state.sampleRate
-        })
-        .then(function (response) {
-            console.log("Inference response", response);
-        })
-        .catch(function (error) {
-            console.log("Inference error", error);
-        });
+        axios.get("http://localhost:5000/get_audio/" + this.state.clipName)
+          .then(response => {
+            console.log('audio data result', response.data);
+            this.setState({
+                audioData: response.data.audio_data,
+                sampleRate: response.data.sample_rate
+            });
+            return axios.post("http://localhost:5000/infer", {
+                audio_data: this.state.audioData,
+                sample_rate: this.state.sampleRate
+            })
+          })
+          .then(response => {
+              this.setState({
+                  modelPrediction: response.data.sentence,
+                  confidence: response.data.confidence
+              })
+          })
+          .catch(function (error) {
+              console.log("retrieveAudioData error", error);
+          });
     }
 
     componentDidMount() {
         this.retrieveAudioData()
-        this.retrieveInference()
     }
 
     render() {
@@ -55,7 +53,7 @@ class AnnotationRow extends React.Component {
               <td>{this.state.id}</td>
               <td>
                 {this.state.clipName}
-                <Player data={this.state.audioData}/>
+                <Player audioData={this.state.audioData}/>
               </td>
               <td><input type="text" name="annotation" /></td>
               <td>{this.state.modelPrediction}</td>
