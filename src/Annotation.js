@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Table from 'react-bootstrap/Table';
-import Player from "./Audio";
+import AnnotationRow from "./AnnotationRow";
 
 
 class AnnotationTable extends React.Component {
@@ -10,13 +10,12 @@ class AnnotationTable extends React.Component {
         this.state = {
             error: null,
             file: undefined,
-            items: [],
             clips: []
         };
     }
 
     retrieveAudioClips() {
-      console.log("Get audio data", this.state.file)
+      console.log("Get audio clips", this.state.file)
       fetch("http://localhost:5000/get_audio_clips/" + this.state.file)
         .then(res => res.json())
         .then(
@@ -34,8 +33,12 @@ class AnnotationTable extends React.Component {
         )
     }
 
+    componentDidMount() {
+        this.retrieveAudioClips()
+    }
+
     render() {
-        const { error, file, items, clips } = this.state;
+        const { error, file, clips } = this.state;
         return (
           <Table striped bordered hover>
               <thead>
@@ -48,13 +51,7 @@ class AnnotationTable extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td><Player /></td>
-                  <td><input type="text" name="annotation" /></td>
-                  <td></td>
-                  <td></td>
-                </tr>
+                <AnnotationRow />
               </tbody>
           </Table>
         )
