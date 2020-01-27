@@ -6,15 +6,12 @@ import 'react-h5-audio-player/lib/styles.css';
 class Player extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            src: this.props.audioSrc,
-        };
     }
     render() {
         return (
             <AudioPlayer
               // autoPlay
-              src={this.state.src}
+              src={this.props.audioSrc}
               onPlay={e => console.log("onPlay")}
               // other props here
             />

@@ -8,8 +8,6 @@ class AnnotationRow extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: this.props.id,
-            clipName: this.props.clipName,
             annotation: "",
             modelPrediction: "",
             confidence: undefined
@@ -17,9 +15,8 @@ class AnnotationRow extends React.Component {
     }
 
     retrieveAudioData() {
-        console.log("Get audio data")
         axios.post("http://localhost:5000/infer", {
-            audio_clip: this.state.clipName
+            audio_clip: this.props.clipName
         })
           .then(response => {
               this.setState({
@@ -28,7 +25,7 @@ class AnnotationRow extends React.Component {
               })
           })
           .catch(function (error) {
-              console.log("retrieveAudioData error", error);
+              console.log("RetrieveAudioData error", error);
           });
     }
 
@@ -36,18 +33,21 @@ class AnnotationRow extends React.Component {
         this.retrieveAudioData()
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.clipName !== prevProps.clipName) {
+            this.retrieveAudioData()
+        }
+    }
+
     render() {
         let player = null;
-        let audioSrc = "http://localhost:5000/get_audio/" + this.state.clipName;
-        if (this.state.audioData !== undefined) {
-            player = <Player src={audioSrc} />
-        }
+        let audioSrc = "http://localhost:5000/get_audio/" + this.props.clipName;
         player = <Player audioSrc={audioSrc} />
         return (
             <tr>
-              <td>{this.state.id}</td>
+              <td>{this.props.id}</td>
               <td>
-                {this.state.clipName}
+                {this.props.clipName}
                 {player}
               </td>
               <td><input type="text" name="annotation" /></td>

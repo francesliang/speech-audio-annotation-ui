@@ -9,24 +9,22 @@ class AnnotationTable extends React.Component {
         super(props);
         this.state = {
             error: null,
-            file: this.props.file,
             clips: []
         };
     }
 
     retrieveAudioClips() {
-      console.log("Get audio clips", this.state.file)
-      fetch("http://localhost:5000/get_audio_clips/" + this.state.file)
+      console.log("Get audio clips", this.props.file)
+      fetch("http://localhost:5000/get_audio_clips/" + this.props.file)
         .then(res => res.json())
         .then(
           (result) => {
-              console.log('audio clips', result)
               this.setState({
                   clips: result
               });
           },
           (error) => {
-              console.log('get audio clips error', error)
+              console.log('Get audio clips error', error)
               this.setState({
                   error: error
               });
@@ -36,6 +34,12 @@ class AnnotationTable extends React.Component {
 
     componentDidMount() {
         this.retrieveAudioClips()
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.file !== prevProps.file) {
+            this.retrieveAudioClips()
+        }
     }
 
     render() {
