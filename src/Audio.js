@@ -7,16 +7,14 @@ class Player extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: this.props.audioData,
+            src: this.props.audioSrc,
         };
     }
     render() {
-        let audioSrc;
-        audioSrc = "data:audio/wav;base64," + this.state.data;
         return (
             <AudioPlayer
-              autoPlay
-              src={audioSrc}
+              // autoPlay
+              src={this.state.src}
               onPlay={e => console.log("onPlay")}
               // other props here
             />
