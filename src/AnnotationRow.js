@@ -10,28 +10,17 @@ class AnnotationRow extends React.Component {
         this.state = {
             id: this.props.id,
             clipName: this.props.clipName,
-            audioData: null,
-            sampleRate: null,
             annotation: "",
             modelPrediction: "",
-            confidence: null
+            confidence: undefined
         };
     }
 
     retrieveAudioData() {
         console.log("Get audio data")
-        axios.get("http://localhost:5000/get_audio/" + this.state.clipName)
-          .then(response => {
-            console.log('audio data result', response.data);
-            this.setState({
-                audioData: response.data.audio_data,
-                sampleRate: response.data.sample_rate
-            });
-            return axios.post("http://localhost:5000/infer", {
-                audio_data: this.state.audioData,
-                sample_rate: this.state.sampleRate
-            })
-          })
+        axios.post("http://localhost:5000/infer", {
+            audio_clip: this.state.clipName
+        })
           .then(response => {
               this.setState({
                   modelPrediction: response.data.sentence,
@@ -48,12 +37,18 @@ class AnnotationRow extends React.Component {
     }
 
     render() {
+        let player = null;
+        let audioSrc = "http://localhost:5000/get_audio/" + this.state.clipName;
+        if (this.state.audioData !== undefined) {
+            player = <Player src={audioSrc} />
+        }
+        player = <Player audioSrc={audioSrc} />
         return (
             <tr>
               <td>{this.state.id}</td>
               <td>
                 {this.state.clipName}
-                <Player audioData={this.state.audioData}/>
+                {player}
               </td>
               <td><input type="text" name="annotation" /></td>
               <td>{this.state.modelPrediction}</td>
