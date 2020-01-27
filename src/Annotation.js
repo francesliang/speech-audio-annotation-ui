@@ -41,7 +41,7 @@ class AnnotationTable extends React.Component {
     render() {
         let rows;
         rows = this.state.clips.map((item, index) => (
-            <AnnotationRow id={index} clipName={item} />
+            <AnnotationRow id={index} clipName={item} key={index}/>
         ));
         return (
           <Table striped bordered hover>
