@@ -40,6 +40,10 @@ class AnnotationRow extends React.Component {
         }
     }
 
+    updateAnnotation(evt) {
+        this.setState({ annotation: evt.target.value })
+    }
+
     render() {
         let audioSrc = "http://localhost:5000/get_audio/" + this.props.clipName;
         return (
@@ -49,14 +53,20 @@ class AnnotationRow extends React.Component {
                 {this.props.clipName}
                 <Player audioSrc={audioSrc} />
               </td>
-              <td><input type="text" name="annotation" /></td>
+              <td>
+                <textarea
+                  value={this.state.annotation}
+                  onChange={evt => this.updateAnnotation(evt)}
+                  type="text"
+                  name="annotation" />
+              </td>
               <td>{this.state.modelPrediction}</td>
               <td>{this.state.confidence}</td>
               <td>
                 <AnnotationForm
                   clipId={this.props.id}
                   clipName={this.props.clipName}
-                  annotation=""
+                  annotation={this.state.annotation}
                 />
               </td>
             </tr>
