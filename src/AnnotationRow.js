@@ -2,6 +2,7 @@ import React from 'react';
 import axios from "axios";
 
 import Player from "./Audio";
+import AnnotationForm from "./AnnotationForm";
 
 
 class AnnotationRow extends React.Component {
@@ -51,6 +52,13 @@ class AnnotationRow extends React.Component {
               <td><input type="text" name="annotation" /></td>
               <td>{this.state.modelPrediction}</td>
               <td>{this.state.confidence}</td>
+              <td>
+                <AnnotationForm
+                  clipId={this.props.id}
+                  clipName={this.props.clipName}
+                  annotation=""
+                />
+              </td>
             </tr>
         )
 

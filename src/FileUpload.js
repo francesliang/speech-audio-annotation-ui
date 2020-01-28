@@ -2,7 +2,7 @@ import React from 'react';
 import 'react-dropzone-uploader/dist/styles.css';
 import Dropzone from 'react-dropzone-uploader';
 
-import AnnotationTable from "./Annotation";
+import AnnotationTable from "./AnnotationTable";
 
 
 class FileUploader extends React.Component {
