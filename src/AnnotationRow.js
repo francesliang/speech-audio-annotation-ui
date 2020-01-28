@@ -40,15 +40,13 @@ class AnnotationRow extends React.Component {
     }
 
     render() {
-        let player = null;
         let audioSrc = "http://localhost:5000/get_audio/" + this.props.clipName;
-        player = <Player audioSrc={audioSrc} />
         return (
             <tr>
               <td>{this.props.id}</td>
               <td>
                 {this.props.clipName}
-                {player}
+                <Player audioSrc={audioSrc} />
               </td>
               <td><input type="text" name="annotation" /></td>
               <td>{this.state.modelPrediction}</td>

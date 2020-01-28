@@ -10,7 +10,7 @@ class Player extends React.Component {
     render() {
         return (
             <AudioPlayer
-              // autoPlay
+              autoPlayAfterSrcChange={false}
               src={this.props.audioSrc}
               onPlay={e => console.log("onPlay")}
               // other props here
@@ -18,6 +18,5 @@ class Player extends React.Component {
         )
       }
 }
-
 
 export default Player
