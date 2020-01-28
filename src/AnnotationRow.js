@@ -36,6 +36,11 @@ class AnnotationRow extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.clipName !== prevProps.clipName) {
+            this.setState({
+                annotation: "",
+                modelPrediction: "",
+                confidence: undefined
+            })
             this.retrieveAudioData()
         }
     }
@@ -58,7 +63,7 @@ class AnnotationRow extends React.Component {
                   value={this.state.annotation}
                   onChange={evt => this.updateAnnotation(evt)}
                   type="text"
-                  name="annotation" />
+                  id="annotation-text" />
               </td>
               <td>{this.state.modelPrediction}</td>
               <td>{this.state.confidence}</td>
