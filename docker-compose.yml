@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+  audio-annotation-ui:
+    container_name: audio-annotation-ui
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:80'
