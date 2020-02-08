@@ -48,22 +48,24 @@ class AnnotationTable extends React.Component {
             <AnnotationRow id={index} clipName={item} key={index}/>
         ));
         return (
-          <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Audio</th>
-                  <th>Annotation</th>
-                  <th>DeepSpeech</th>
-                  <th>Confidence</th>
-                  <th>Google Speech-to-Text</th>
-                  <th>Annotate</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows}
-              </tbody>
-          </Table>
+          <div style={{marginTop: "50px"}}>
+              <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Audio</th>
+                      <th>Annotation</th>
+                      <th>DeepSpeech</th>
+                      <th>Confidence</th>
+                      <th>Google Speech-to-Text</th>
+                      <th>Annotate</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rows}
+                  </tbody>
+              </Table>
+          </div>
         )
     }
 }

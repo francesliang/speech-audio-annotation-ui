@@ -32,7 +32,7 @@ class App extends React.Component {
               <div style={{marginBottom: "50px"}}>
                 <InputGroup className="mb-3">
                     <InputGroup.Prepend>
-                      <InputGroup.Text id="basic-addon1">Project Name</InputGroup.Text>
+                      <InputGroup.Text style={{backgroundColor: "rgb(217, 217, 217, 0.3)", fontWeight: "bold"}}>Project Name</InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl
                       name="projectName"
@@ -43,7 +43,7 @@ class App extends React.Component {
                 </InputGroup>
                 <InputGroup className="mb-3">
                     <InputGroup.Prepend>
-                      <InputGroup.Text id="basic-addon2">Model Confidence Threshold</InputGroup.Text>
+                      <InputGroup.Text style={{backgroundColor: "rgb(217, 217, 217, 0.3)", fontWeight: "bold"}}>Model Confidence Threshold</InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl
                       name="modelThreshold"
@@ -54,18 +54,18 @@ class App extends React.Component {
                 </InputGroup>
                 <InputGroup className="mb-3">
                     <InputGroup.Prepend>
-                      <InputGroup.Text id="basic-addon3">Run Google Speech-to-Text</InputGroup.Text>
+                      <InputGroup.Text style={{backgroundColor: "rgb(217, 217, 217, 0.3)", fontWeight: "bold"}}>Run Google Speech-to-Text</InputGroup.Text>
                     </InputGroup.Prepend>
-                    <FormControl disabled aria-label="" />
-                    <InputGroup.Append>
+                    <FormControl disabled aria-label="" style={{backgroundColor: "rgb(217, 217, 217, 0.2)"}}/>
+                    <InputGroup.Append style={{backgroundColor: "rgb(217, 217, 217, 0.3)"}}>
                       <InputGroup.Checkbox name="isGoogleStt" onChange={e => this.handleCheckboxChange(e)}/>
                     </InputGroup.Append>
                 </InputGroup>
                 <InputGroup className="mb-3">
                     <InputGroup.Prepend>
-                      <InputGroup.Text id="basic-addon4">Automate annotation</InputGroup.Text>
+                      <InputGroup.Text style={{backgroundColor: "rgb(217, 217, 217, 0.3)", fontWeight: "bold"}}>Automate annotation</InputGroup.Text>
                     </InputGroup.Prepend>
-                    <FormControl disabled aria-label="" />
+                    <FormControl disabled aria-label="" style={{backgroundColor: "rgb(217, 217, 217, 0.2)"}}/>
                     <InputGroup.Append>
                       <InputGroup.Checkbox name="isAutomated" onChange={e => this.handleCheckboxChange(e)}/>
                     </InputGroup.Append>
