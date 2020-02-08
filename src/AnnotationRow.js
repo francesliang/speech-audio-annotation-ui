@@ -11,7 +11,8 @@ class AnnotationRow extends React.Component {
         this.state = {
             annotation: "",
             modelPrediction: "",
-            confidence: undefined
+            confidence: undefined,
+            recognition: ""
         };
     }
 
@@ -26,7 +27,19 @@ class AnnotationRow extends React.Component {
               })
           })
           .catch(function (error) {
-              console.log("RetrieveAudioData error", error);
+              console.log("RetrieveAudioData Inference error", error);
+          });
+
+        axios.post("http://localhost:5000/recognise", {
+            audio_clip: this.props.clipName
+        })
+          .then(response => {
+              this.setState({
+                  recognition: response.data.transcript,
+              })
+          })
+          .catch(function (error) {
+              console.log("RetrieveAudioData Recognition error", error);
           });
     }
 
@@ -39,7 +52,8 @@ class AnnotationRow extends React.Component {
             this.setState({
                 annotation: "",
                 modelPrediction: "",
-                confidence: undefined
+                confidence: undefined,
+                recognition: ""
             })
             this.retrieveAudioData()
         }
@@ -67,6 +81,7 @@ class AnnotationRow extends React.Component {
               </td>
               <td>{this.state.modelPrediction}</td>
               <td>{this.state.confidence}</td>
+              <td>{this.state.recognition}</td>
               <td>
                 <AnnotationForm
                   clipId={this.props.id}

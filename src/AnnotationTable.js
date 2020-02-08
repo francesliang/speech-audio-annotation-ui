@@ -56,6 +56,7 @@ class AnnotationTable extends React.Component {
                   <th>Annotation</th>
                   <th>DeepSpeech</th>
                   <th>Confidence</th>
+                  <th>Google Speech-to-Text</th>
                   <th>Annotate</th>
                 </tr>
               </thead>
