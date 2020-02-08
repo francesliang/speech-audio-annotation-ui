@@ -45,7 +45,15 @@ class AnnotationTable extends React.Component {
     render() {
         let rows;
         rows = this.state.clips.map((item, index) => (
-            <AnnotationRow id={index} clipName={item} key={index}/>
+            <AnnotationRow
+              id={index}
+              clipName={item}
+              key={index}
+              annotationFileName={this.props.annotationFileName}
+              annotationThreshold={this.props.annotationThreshold}
+              runRecognition={this.props.runRecognition}
+              automate={this.props.automate}
+            />
         ));
         return (
           <div style={{marginTop: "50px"}}>

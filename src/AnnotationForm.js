@@ -5,9 +5,7 @@ import axios from "axios";
 class AnnotationForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        };
+        this.state = {};
         this.formHandler = this.formHandler.bind(this)
     }
 
@@ -15,7 +13,8 @@ class AnnotationForm extends React.Component {
         axios.post("http://localhost:5000/annotate", {
             clip_id: this.props.clipId,
             clip_name: this.props.clipName,
-            annotation: this.props.annotation
+            annotation: this.props.annotation,
+            annotation_file: this.props.annotationFileName
         })
           .then(response => {
               console.log("Submitted annotation form")

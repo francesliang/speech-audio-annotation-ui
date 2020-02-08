@@ -25,22 +25,31 @@ class AnnotationRow extends React.Component {
                   modelPrediction: response.data.sentence,
                   confidence: response.data.confidence
               })
+              if (response.data.confidence > this.props.annotationThreshold) {
+                  this.setState({
+                      annotation: response.data.sentence
+                  })
+              }
           })
           .catch(function (error) {
               console.log("RetrieveAudioData Inference error", error);
           });
 
-        axios.post("http://localhost:5000/recognise", {
-            audio_clip: this.props.clipName
-        })
-          .then(response => {
-              this.setState({
-                  recognition: response.data.transcript,
+        if (this.props.runRecognition) {
+            axios.post("http://localhost:5000/recognise", {
+                audio_clip: this.props.clipName
+            })
+              .then(response => {
+                  this.setState({
+                      recognition: response.data.transcript,
+                  })
               })
-          })
-          .catch(function (error) {
-              console.log("RetrieveAudioData Recognition error", error);
-          });
+              .catch(function (error) {
+                  console.log("RetrieveAudioData Recognition error", error);
+              });
+        } else {
+            this.setState({ recognition: "N/A" })
+        }
     }
 
     componentDidMount() {
@@ -48,7 +57,7 @@ class AnnotationRow extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.clipName !== prevProps.clipName) {
+        if (this.props !== prevProps) {
             this.setState({
                 annotation: "",
                 modelPrediction: "",
@@ -87,6 +96,7 @@ class AnnotationRow extends React.Component {
                   clipId={this.props.id}
                   clipName={this.props.clipName}
                   annotation={this.state.annotation}
+                  annotationFileName={this.props.annotationFileName}
                 />
               </td>
             </tr>

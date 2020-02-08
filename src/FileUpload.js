@@ -6,8 +6,8 @@ import AnnotationTable from "./AnnotationTable";
 
 
 class FileUploader extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = { audioFile: undefined }
         this.getUploadParams = this.getUploadParams.bind(this)
         this.handleChangesStatus = this.handleChangesStatus.bind(this)
@@ -37,7 +37,13 @@ class FileUploader extends React.Component {
                     //onSubmit={handleSubmit}
                     styles={{ dropzone: { minHeight: 200, maxHeight: 250 } }}
                   />
-                  <AnnotationTable file={this.state.audioFile}/>
+                  <AnnotationTable
+                    file={this.state.audioFile}
+                    annotationFileName={this.props.annotationFileName}
+                    annotationThreshold={this.props.annotationThreshold}
+                    runRecognition={this.props.runRecognition}
+                    automate={this.props.automate}
+                  />
               </div>;
         } else {
             page =

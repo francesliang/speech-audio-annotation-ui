@@ -84,7 +84,12 @@ class App extends React.Component {
                       </Card>
                   </Accordion>
               </div>
-              <FileUploader />
+              <FileUploader
+                annotationFileName={this.state.projectName}
+                annotationThreshold={this.state.modelThreshold}
+                runRecognition={this.state.isGoogleStt}
+                automate={this.state.isAutomated}
+              />
           </div>
         </div>
       );
