@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from "axios";
 import './App.css';
 
 import {InputGroup, FormControl, Accordion, Card, Button} from 'react-bootstrap';
@@ -14,6 +15,7 @@ class App extends React.Component {
             isGoogleStt: undefined,
             isAutomated: undefined
         }
+        this.requestTraining = this.requestTraining.bind(this)
     }
 
     handleTextChange(e) {
@@ -22,6 +24,16 @@ class App extends React.Component {
 
     handleCheckboxChange(e) {
         this.setState({ [e.target.name]: e.target.checked });
+    }
+
+    requestTraining(){
+        axios.get("http://localhost:5000/train")
+          .then(response => {
+              console.log("Start training");
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
     }
 
     render() {
@@ -79,6 +91,7 @@ class App extends React.Component {
                                   <InputGroup.Checkbox name="isAutomated" onChange={e => this.handleCheckboxChange(e)}/>
                                 </InputGroup.Append>
                             </InputGroup>
+                            <button onClick={this.requestTraining} className="btn btn-primary">Train Model</button>
                           </Card.Body>
                         </Accordion.Collapse>
                       </Card>
