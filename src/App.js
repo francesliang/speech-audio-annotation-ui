@@ -2,7 +2,7 @@ import React from 'react';
 import axios from "axios";
 import './App.css';
 
-import {InputGroup, FormControl, Accordion, Card, Button} from 'react-bootstrap';
+import {InputGroup, FormControl, Accordion, Card, Button, Modal, Spinner} from 'react-bootstrap';
 import FileUploader from "./FileUpload";
 
 
@@ -13,9 +13,12 @@ class App extends React.Component {
             projectName: undefined,
             modelThreshold: undefined,
             isGoogleStt: undefined,
-            isAutomated: undefined
+            isAutomated: undefined,
+            trainingMessage: undefined,
+            showTrainingMessage: false
         }
         this.requestTraining = this.requestTraining.bind(this)
+        this.handleMessageClose = this.handleMessageClose.bind(this)
     }
 
     handleTextChange(e) {
@@ -26,18 +29,35 @@ class App extends React.Component {
         this.setState({ [e.target.name]: e.target.checked });
     }
 
+    handleMessageClose() {
+        this.setState({ showTrainingMessage: false })
+    }
+
+    handleMessageShow() {
+        this.setState({ showTrainingMessage: true })
+    }
+
     requestTraining(){
+        this.setState({trainingMessage: undefined});
         axios.get("http://localhost:5000/train")
           .then(response => {
-              console.log("Start training");
+              this.setState({trainingMessage: "Model training has been triggered"});
           })
           .catch(function (error) {
               console.log(error);
+              this.setState({trainingMessage: "Model training trigger encountered error:" + error});
           });
+        this.handleMessageShow();
     }
 
     render() {
-      console.log(this.state);
+      let trainingMessage;
+      if (this.state.trainingMessage !== undefined) {
+          trainingMessage = <p>{this.state.trainingMessage}</p>
+      } else {
+          trainingMessage = <Spinner animation="border" role="status" variant="primary"><span className="sr-only">Loading...</span></Spinner>
+      }
+
       return (
         <div className="App">
           <div className="container" style={{paddingTop: "1rem"}}>
@@ -92,6 +112,14 @@ class App extends React.Component {
                                 </InputGroup.Append>
                             </InputGroup>
                             <button onClick={this.requestTraining} className="btn btn-primary">Train Model</button>
+                            <Modal show={this.state.showTrainingMessage} onHide={this.handleMessageClose}>
+                                <Modal.Header closeButton>
+                                <Modal.Title>Training Message</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                  {trainingMessage}
+                                </Modal.Body>
+                            </Modal>
                           </Card.Body>
                         </Accordion.Collapse>
                       </Card>
