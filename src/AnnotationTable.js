@@ -19,7 +19,7 @@ class AnnotationTable extends React.Component {
 
     retrieveAudioClips() {
       console.log("Get audio clips", this.props.file)
-      fetch("http://localhost:5000/get_audio_clips/" + this.props.file)
+      fetch(process.env.REACT_APP_API_URL + "/get_audio_clips/" + this.props.file)
         .then(res => res.json())
         .then(
           (result) => {

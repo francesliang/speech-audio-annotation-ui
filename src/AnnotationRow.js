@@ -17,7 +17,7 @@ class AnnotationRow extends React.Component {
     }
 
     retrieveAudioData() {
-        axios.post("http://localhost:5000/infer", {
+        axios.post(process.env.REACT_APP_API_URL + "/infer", {
             audio_clip: this.props.clipName
         })
           .then(response => {
@@ -36,7 +36,7 @@ class AnnotationRow extends React.Component {
           });
 
         if (this.props.runRecognition) {
-            axios.post("http://localhost:5000/recognise", {
+            axios.post(process.env.REACT_APP_API_URL + "/recognise", {
                 audio_clip: this.props.clipName
             })
               .then(response => {
@@ -73,7 +73,7 @@ class AnnotationRow extends React.Component {
     }
 
     render() {
-        let audioSrc = "http://localhost:5000/get_audio/" + this.props.clipName;
+        let audioSrc = process.env.REACT_APP_API_URL + "/get_audio/" + this.props.clipName;
         return (
             <tr>
               <td>{this.props.id}</td>

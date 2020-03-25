@@ -10,7 +10,7 @@ class AnnotationForm extends React.Component {
     }
 
     formHandler() {
-        axios.post("http://localhost:5000/annotate", {
+        axios.post(process.env.REACT_APP_API_URL + "/annotate", {
             clip_id: this.props.clipId,
             clip_name: this.props.clipName,
             annotation: this.props.annotation,

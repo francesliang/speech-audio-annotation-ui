@@ -14,14 +14,11 @@ class FileUploader extends React.Component {
     }
 
     getUploadParams() {
-        return { url: "http://localhost:5000/upload" }
+        return { url: process.env.REACT_APP_API_URL + "/upload" }
     }
 
     handleChangesStatus({ meta }, status) {
-        console.log("change status")
-        console.log(status, meta)
         if (status === "done") {
-            console.log(meta.name)
             this.setState({ audioFile: meta.name })
         }
     }
