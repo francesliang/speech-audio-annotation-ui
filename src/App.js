@@ -39,7 +39,9 @@ class App extends React.Component {
 
     requestTraining(){
         this.setState({trainingMessage: undefined});
-        axios.get(process.env.REACT_APP_API_URL + "/train")
+        axios.post(process.env.REACT_APP_API_URL + "/train", {
+            annotation_file: this.state.projectName
+        })
           .then(response => {
               this.setState({trainingMessage: "Model training has been triggered"});
           })
