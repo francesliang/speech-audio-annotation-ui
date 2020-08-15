@@ -26,6 +26,7 @@ class AnnotationTable extends React.Component {
               this.setState({
                   allClips: result
               });
+              this.onPageChanged({ currentPage: 1, totalPages: Math.ceil(result.length / 10), pageLimit: 10 });
           },
           (error) => {
               console.log('Get audio clips error', error)

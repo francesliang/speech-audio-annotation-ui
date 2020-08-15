@@ -15,6 +15,8 @@ class App extends React.Component {
             isGoogleStt: undefined,
             isAutomated: undefined,
             trainingMessage: undefined,
+            trainingEpochs: undefined,
+            trainingLr: undefined,
             showTrainingMessage: false
         }
         this.requestTraining = this.requestTraining.bind(this)
@@ -40,7 +42,9 @@ class App extends React.Component {
     requestTraining(){
         this.setState({trainingMessage: undefined});
         axios.post(process.env.REACT_APP_API_URL + "/train", {
-            annotation_file: this.state.projectName
+            annotation_file: this.state.projectName,
+            epochs: this.state.trainingEpochs,
+            learning_rate: this.state.trainingLr
         })
           .then(response => {
               this.setState({trainingMessage: "Model training has been triggered"});
@@ -112,6 +116,28 @@ class App extends React.Component {
                                 <InputGroup.Append>
                                   <InputGroup.Checkbox name="isAutomated" onChange={e => this.handleCheckboxChange(e)}/>
                                 </InputGroup.Append>
+                            </InputGroup>
+                            <InputGroup className="mb-3">
+                                <InputGroup.Prepend>
+                                  <InputGroup.Text style={{backgroundColor: "rgb(217, 217, 217, 0.3)"}}>Model Training Epochs</InputGroup.Text>
+                                </InputGroup.Prepend>
+                                <FormControl
+                                  name="trainingEpochs"
+                                  onChange={e => this.handleTextChange(e)}
+                                  aria-label="threshold"
+                                  aria-describedby="basic-addon2"
+                                />
+                            </InputGroup>
+                            <InputGroup className="mb-3">
+                                <InputGroup.Prepend>
+                                  <InputGroup.Text style={{backgroundColor: "rgb(217, 217, 217, 0.3)"}}>Training Learning Rate</InputGroup.Text>
+                                </InputGroup.Prepend>
+                                <FormControl
+                                  name="trainingLr"
+                                  onChange={e => this.handleTextChange(e)}
+                                  aria-label="threshold"
+                                  aria-describedby="basic-addon2"
+                                />
                             </InputGroup>
                             <button onClick={this.requestTraining} className="btn btn-primary">Train Model</button>
                             <Modal show={this.state.showTrainingMessage} onHide={this.handleMessageClose}>
