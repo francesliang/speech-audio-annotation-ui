@@ -66,7 +66,7 @@ class App extends React.Component {
 
       return (
         <div className="App">
-          <div className="container" style={{paddingTop: "1rem"}}>
+          <div className="container" style={{paddingTop: "1rem", paddingBottom: "20rem"}}>
               <div style={{marginBottom: "50px"}}>
                   <Accordion defaultActiveKey="" style={{borderBottom: "1px solid rgba(0, 0, 0, 0.125)", textAlign: "left"}}>
                       <Card>
