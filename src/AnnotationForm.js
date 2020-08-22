@@ -26,6 +26,10 @@ class AnnotationForm extends React.Component {
     }
 
     render() {
+        if (this.props.automate && this.props.annotation !== undefined) {
+            console.log("Annotate file automatcially");
+            this.formHandler();
+        }
         return(
             <button onClick={this.formHandler} className="btn btn-primary">Save</button>
         )

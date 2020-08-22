@@ -42,6 +42,7 @@ class AnnotationRow extends React.Component {
               .then(response => {
                   this.setState({
                       recognition: response.data.transcript,
+                      annotation: response.data.transcript
                   })
               })
               .catch(function (error) {
@@ -97,6 +98,7 @@ class AnnotationRow extends React.Component {
                   clipName={this.props.clipName}
                   annotation={this.state.annotation}
                   annotationFileName={this.props.annotationFileName}
+                  automate={this.props.automate}
                 />
               </td>
             </tr>
